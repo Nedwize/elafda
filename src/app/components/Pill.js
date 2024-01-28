@@ -1,9 +1,7 @@
 const Pill = ({ title = 'Indian Tech Twitter', active = false }) => (
     <div
-        className={`transition-all duration-200 ease-in-out hover:border-neutral-600 border-neutral-700 rounded-full text-sm py-1 px-3 border cursor-pointer ${
-            active
-                ? 'bg-neutral-800 font-light'
-                : 'bg-neutral-950 font-extralight'
+        className={`transition-all duration-200 ease-in-out border border-[#e5e7eb] rounded-full text-sm py-1 px-3 cursor-pointer ${
+            active ? 'bg-[#1f2e3d] font-light' : 'bg-[#15202b] font-extralight'
         }`}
     >
         {title}
