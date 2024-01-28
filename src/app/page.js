@@ -1,6 +1,40 @@
+'use client'
+
 import { Tweet } from 'react-tweet'
-import Card from './components/Card.js'
 import Pill from './components/Pill.js'
+import { useState } from 'react'
+
+const TWEETS_PER_TAG = {
+    INDIAN_TECH_X: {
+        title: 'Indian Tech Twitter',
+        tweetIds: [
+            '1751666231135076727',
+            '1751458842934956123',
+            '1751690301528261000',
+            '1751670566023729383',
+        ],
+    },
+    POLITICS: {
+        title: 'Political Banter',
+        tweetIds: [
+            '1751638572783051121',
+            '1747207420948906408',
+            '1751666231135076727',
+        ],
+    },
+    CRICKET_FANS: {
+        title: 'Cricket Fanclubs',
+        tweetIds: [
+            '1751675355448951173',
+            '1751621951582621809',
+            '1751636419464892881',
+        ],
+    },
+    TOXIC_BOLLY_FANS: {
+        title: 'Toxic Bolly Fanclubs',
+        tweetIds: ['1751458842934956123', '1751690301528261000'],
+    },
+}
 
 const SiteHeader = () => (
     <div className="flex flex-col text-center items-center justify-center gap-4">
@@ -11,12 +45,21 @@ const SiteHeader = () => (
     </div>
 )
 
-const TagsContainer = () => (
+const TagsContainer = ({ selectedTag, setSelectedTag }) => (
     <div className="flex items-center justify-center flex-wrap w-full px-6 gap-2">
-        <Pill active title="Indian Tech Twitter" />
-        <Pill title="Political Banter" />
-        <Pill title="Cricket Fanclubs" />
-        <Pill title="Toxic Bolly Fanclubs" />
+        {[
+            TWEETS_PER_TAG.CRICKET_FANS,
+            TWEETS_PER_TAG.INDIAN_TECH_X,
+            TWEETS_PER_TAG.POLITICS,
+            TWEETS_PER_TAG.TOXIC_BOLLY_FANS,
+        ].map((x) => (
+            <Pill
+                title={x.title}
+                key={x.title}
+                active={x.title === selectedTag.title}
+                onClick={() => setSelectedTag(x)}
+            />
+        ))}
     </div>
 )
 
@@ -26,21 +69,9 @@ const HeadLines = ({ text = '' }) => (
     </span>
 )
 
-const tweets = [
-    '1751638572783051121',
-    '1747207420948906408',
-    '1751666231135076727',
-    '1751458842934956123',
-    '1751690301528261000',
-    '1751670566023729383',
-    '1751675355448951173',
-    '1751621951582621809',
-    '1751636419464892881',
-]
-
-const TweetContainer = () => (
+const TweetContainer = ({ selectedTag }) => (
     <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 text-[10px] tweet-container">
-        {tweets.map((x) => (
+        {selectedTag.tweetIds.map((x) => (
             <div key={x} className="h-auto">
                 <Tweet id={x} />
             </div>
@@ -49,6 +80,8 @@ const TweetContainer = () => (
 )
 
 export default function Home() {
+    const [selectedTag, setSelectedTag] = useState(TWEETS_PER_TAG.INDIAN_TECH_X)
+
     return (
         <main className="min-h-screen pt-10 pb-14">
             <marquee className="inline-block bg-[#1f2e3d] border-y border-[#e5e7eb] text-black py-2 w-full">
@@ -60,9 +93,11 @@ export default function Home() {
             </marquee>
             <div className="flex flex-col gap-8 items-center justify-start px-14 pt-10">
                 <SiteHeader />
-                <TagsContainer />
-                <TweetContainer />
-                <Card />
+                <TagsContainer
+                    selectedTag={selectedTag}
+                    setSelectedTag={setSelectedTag}
+                />
+                <TweetContainer selectedTag={selectedTag} />
                 <div className="mt-24 opacity-50 font-extralight">
                     Created with 🧠 by @nedwize
                 </div>
