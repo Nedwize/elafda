@@ -1,6 +1,12 @@
-const Pill = ({ title }) => (
-    <div className="transition-all duration-200 ease-in-out hover:border-neutral-600 hover:bg-opacity-30 border-neutral-700 bg-neutral-800 bg-opacity-20 rounded-full text-sm py-1 px-3 font-extralight border cursor-pointer">
-        Indian Tech
+const Pill = ({ title = 'Indian Tech Twitter', active = false }) => (
+    <div
+        className={`transition-all duration-200 ease-in-out hover:border-neutral-600 border-neutral-700 rounded-full text-sm py-1 px-3 border cursor-pointer ${
+            active
+                ? 'bg-neutral-800 font-light'
+                : 'bg-neutral-950 font-extralight'
+        }`}
+    >
+        {title}
     </div>
 )
 

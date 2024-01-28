@@ -1,6 +1,6 @@
 const Card = () => (
     <div
-        className="group cursor-pointer rounded-lg border border-transparent p-6 transition-all duration-200 ease-in-out hover:border-neutral-600 hover:bg-opacity-30 border-neutral-700 bg-neutral-800 bg-opacity-20"
+        className="group cursor-pointer rounded-lg border p-6 transition-all duration-200 ease-in-out hover:border-neutral-600 hover:bg-opacity-30 border-neutral-700 bg-neutral-800 bg-opacity-20"
         target="_blank"
         rel="noopener noreferrer"
     >
